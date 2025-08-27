@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { supabaseAdmin } from "../../../lib/supabaseAdmin";
 
 const SECRET = process.env.WEBHOOK_SECRET!;
 

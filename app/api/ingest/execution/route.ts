@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { supabaseAdmin } from "../../../lib/supabaseAdmin";
 
 const SECRET = process.env.WEBHOOK_SECRET!;
 
@@ -13,11 +13,6 @@ function verifySignature(raw: string, signature: string) {
   }
 }
 
-/**
- * POST /api/ingest/execution
- * body:
- *  - ส่ง plan_id โดยตรง หรือส่ง (plan_date, session, zone_type) เพื่อค้นหา plan_id
- */
 export async function POST(req: NextRequest) {
   const raw = await req.text();
   const sig = req.headers.get("x-signature") || "";
@@ -58,7 +53,7 @@ export async function POST(req: NextRequest) {
     used_conditions: body.used_conditions ?? [],
     news_context: body.news_context ?? null,
     confidence_used: body.confidence_used ?? null,
-    result: body.result, // 'WIN'|'LOSE'|'BE'
+    result: body.result,
     closed_at: body.closed_at ?? null
   };
 
