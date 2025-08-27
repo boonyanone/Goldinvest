@@ -1,23 +1,17 @@
-# Goldinvest (MVP)
+# Goldinvest — App Router Only (Clean)
 
-Next.js (App Router) + Supabase + Webhook รับ JSON "แผนเทรดตอนเช้า"
+โครง Next.js แบบ App Router ล้วน (ไม่มีโฟลเดอร์ `pages/`) พร้อม API:
+- POST /api/ingest/plan        (รับ JSON แผนตอนเช้า + HMAC X-Signature)
+- POST /api/ingest/execution   (บันทึกผล session)
+- GET  /api/plans/today        (ดึงแผนของวันนี้)
 
-## ขั้นตอนใช้งาน
-1) สร้างโปรเจกต์ Supabase → เปิดหน้า SQL → รันไฟล์ `db/schema.sql`
-2) ตั้งค่า ENV (ดู `.env.example`) ทั้งในเครื่องและบน Vercel
-3) รัน dev:
-```bash
-npm i
-npm run dev
-```
-4) ทดสอบ Webhook:
-```bash
-# สร้าง signature (HMAC-SHA256) ด้วย Node:
-node -e "const fs=require('fs'),crypto=require('crypto');const raw=fs.readFileSync('plan.json');const mac=crypto.createHmac('sha256',process.env.WEBHOOK_SECRET||'change-this-to-a-long-random-string').update(raw).digest('hex');console.log(mac)"
-# นำค่า <SIG> ไปใส่หัวข้อ X-Signature แล้วยิง:
-curl -X POST http://localhost:3000/api/ingest/plan  -H "Content-Type: application/json"  -H "X-Signature: <SIG>"  --data-binary @plan.json
-```
-5) เปิดหน้า Today: http://localhost:3000
+## ขั้นตอน
+1) Supabase → รัน `db/schema.sql`
+2) ตั้งค่า ENV: `.env.local` (dev) และบน Vercel (prod)
+3) รัน dev: `npm i && npm run dev`
+4) ทดสอบ API:
+   - `curl http://localhost:3000/api/plans/today`
+   - สร้าง signature จาก plan.json แล้วยิงไปที่ `/api/ingest/plan`
+5) Deploy Vercel
 
-## Deploy บน Vercel
-- เชื่อม GitHub repo, ตั้ง ENV, Deploy
+> หมายเหตุ: โปรเจกต์นี้ **ไม่มีโฟลเดอร์ `pages/`** เพื่อเลี่ยง conflict กับ App Router

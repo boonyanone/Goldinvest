@@ -1,0 +1,17 @@
+{
+  "plan_date": "2025-08-27",
+  "session": "ASIA",
+  "zone_type": "MAIN",
+  "entry_price": 3369.8,
+  "exit_price": 3377.2,
+  "pnl_usd": 7.4,
+  "hit_tp": true,
+  "hit_sl": false,
+  "mfe": 9.1,
+  "mae": -2.0,
+  "used_conditions": ["BUY_ZONE_TOUCH","CANDLE_HAMMER_OR_ENGULFING","RSI_LT_30"],
+  "news_context": "No major Asia data; low-vol morning",
+  "confidence_used": 70,
+  "result": "WIN",
+  "closed_at": "2025-08-27T12:05:00+07:00"
+}
