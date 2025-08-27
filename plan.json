@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "plan_date": "2025-08-27",
+  "items": [
+    {
+      "session": "ASIA",
+      "zone_type": "MAIN",
+      "buy_zone": [3368, 3372],
+      "tp_zone": [3375, 3380],
+      "sl": 3365,
+      "confidence": 70,
+      "conditions": ["BUY_ZONE_TOUCH", "CANDLE_HAMMER_OR_ENGULFING", "RSI_LT_30"],
+      "historical": { "win_rate": 72, "avg_pnl": 6.8, "max_dd": -5.0 },
+      "note": "Asia เงียบ เน้น confluence"
+    }
+  ]
+}
