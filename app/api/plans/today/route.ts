@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "../../../../lib/supabaseAdmin";
+import { getSupabaseAdmin } from "../../../../lib/supabaseAdmin";
 
 export async function GET() {
+  const supabaseAdmin = getSupabaseAdmin();
+
   const today = new Date().toISOString().slice(0, 10);
   const { data, error } = await supabaseAdmin
     .from("plans")

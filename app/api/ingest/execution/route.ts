@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-import { supabaseAdmin } from "../../../../lib/supabaseAdmin";
+import { getSupabaseAdmin } from "../../../../lib/supabaseAdmin";
 
 const SECRET = process.env.WEBHOOK_SECRET!;
 
@@ -14,6 +14,8 @@ function verifySignature(raw: string, signature: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const supabaseAdmin = getSupabaseAdmin();
+
   const raw = await req.text();
   const sig = req.headers.get("x-signature") || "";
   if (!verifySignature(raw, sig)) {
